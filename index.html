@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>ENTAKU GAMES</title>
+<style>
+html,body{margin:0;height:100%;background:#000;overflow:hidden}
+video{position:fixed;inset:0;width:100vw;height:100vh;object-fit:contain;background:#000}
+#tap{position:fixed;inset:0;display:none;align-items:center;justify-content:center;color:#fff;font:600 24px sans-serif}
+</style>
+</head>
+<body>
+<video id="v" src="entakugames_loop_v11%202.MP4" autoplay muted loop playsinline preload="auto"></video>
+<div id="tap">タップして再生</div>
+<script>
+const v=document.getElementById('v'),t=document.getElementById('tap');
+const play=()=>v.play().then(()=>t.style.display='none').catch(()=>t.style.display='flex');
+document.addEventListener('click',play);
+v.addEventListener('pause',()=>setTimeout(play,500));
+v.addEventListener('ended',()=>{v.currentTime=0;play();});
+v.addEventListener('stalled',()=>setTimeout(play,2000));
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)play();});
+play();
+</script>
+</body>
+</html>
